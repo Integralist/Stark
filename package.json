@@ -1,0 +1,31 @@
+{
+  "name": "Stark",
+  "version": "0.0.0",
+  "description": "Simplified separation of components to being decoupled applications",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Integralist/Stark.git"
+  },
+  "keywords": [
+    "Grunt",
+    "pubsub",
+    "patterns",
+    "components",
+    "decoupled"
+  ],
+  "author": "Mark McDonnell",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "a3aee542458b2341d272b3c5616089c340bdf9a3",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-contrib-sass": "~0.3.0"
+  }
+}

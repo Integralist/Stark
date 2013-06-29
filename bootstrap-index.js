@@ -1,4 +1,4 @@
 require(['app'], function(app) {
-    app.use('testing');
+    app.use('use string-utility lib');
     app.start();
 });
