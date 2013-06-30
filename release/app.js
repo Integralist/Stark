@@ -1,1 +1,0 @@
-define(["require"],function(e){function t(){}return t.prototype.use=function(t){console.log("use extension:",t),e(["extensions/"+t+"/extension"])},t.prototype.start=function(){console.log("start application");var t=document.querySelectorAll("[data-component]"),n=t.length;while(n--)e(["components/"+t[n].getAttribute("data-component")+"/component"],function(e){e.init()})},new t});
