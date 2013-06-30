@@ -10,7 +10,7 @@ There are some strict conventions...
 
 2. Extensions need to be placed inside a `extensions` directory, inside a folder which matches the extension name, and the file itself needs to be called `extension.js`
 
-3. You `boostrap-xxx.js` files should include only one `require` call and that should be to the 'app' (see this project's code for an example) -> no other code of importance to the project should be placed inside that bootstrap file (important code should be a component that is loaded by `app.js`)
+3. Each `boostrap-xxx.js` file should include only one `require` call and that should be to the 'app' (see this project's code for an example) -> no other code of importance to the project should be placed inside that bootstrap file (important code should be a component that is loaded by `app.js`)
 
 ...that's it.
 
