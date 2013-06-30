@@ -1,8 +1,9 @@
 define(['require'], function(require) {
     function App() {}
 
-    App.prototype.use = function(component) {
-        console.log('use component:', component);
+    App.prototype.use = function(extension) {
+        console.log('use extension:', extension);
+        require(['extensions/' + extension + '/extension']);
     }
 
     App.prototype.start = function() {

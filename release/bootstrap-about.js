@@ -1,4 +1,1 @@
-require(['app'], function(app) {
-    app.use('use number-utility lib');
-    app.start();
-});
+define("bootstrap-about",function(){}),define("components/world/component",{init:function(){console.log("world component initialised")}}),require(["components/world/component"]);

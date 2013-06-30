@@ -1,5 +1,5 @@
 define({
     init: function() {
-        console.log('hello component initialised');
+        console.log('hello component initialised'.blah());
     }
 });

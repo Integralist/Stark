@@ -1,4 +1,1 @@
-require(['app'], function(app) {
-    app.use('use string-utility lib');
-    app.start();
-});
+define("bootstrap-index",function(){}),define("components/hello/component",{init:function(){console.log("hello component initialised".blah())}}),define("components/world/component",{init:function(){console.log("world component initialised")}}),require(["components/hello/component","components/world/component"]);
