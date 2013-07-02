@@ -47,3 +47,48 @@ We rely heavily on the conventions defined above and [Grunt](http://gruntjs.com/
 `grunt` (default task calls `get-components`)
 `grunt get-components` (builds the r.js configuration object and calls `requirejs`)
 `grunt requirejs` (executes build and does some clean-up)
+
+## Example of optimised code
+
+### Original `bootstrap-index`...
+
+```js
+require(['app'], function(app) {
+    app.use('blah');
+    app.start();
+});
+```
+
+...in development this would asynchronously load both the `blah` extension and any components found within `index.html`.
+
+### The resulting optimised `bootstrap-index`...
+
+```js
+define("bootstrap-index", function(){});
+
+define('extensions/blah/extension',[],function(){
+    if (!String.prototype.blah) {
+        String.prototype.blah = function() {
+            return this + ' BLAH!';
+        };
+    }
+});
+
+define('components/hello/component',{
+    init: function() {
+        console.log('hello component initialised'.blah());
+    }
+});
+
+define('components/world/component',{
+    init: function() {
+        console.log('world component initialised');
+    }
+});
+
+require(["extensions/blah/extension", "components/hello/component", "components/world/component"], function(a,b,c){
+    b.init();
+    c.init();
+});
+
+```
