@@ -2,9 +2,15 @@
 
 Simplified separation of components to being decoupled applications
 
+## Design
+
+The basic API is based off of the [Aura.js](https://github.com/aurajs/aura) project, but 99% of that API is not replicated here.
+
+I'm looking to create a simplified project boilerplate and NOT a framework (or encompassing suite of tools).
+
 ## Conventions
 
-There are some strict conventions...
+There are three conventions that need to be adhered to...
 
 1. Components need to be placed inside a `components` directory, inside a folder which matches the components name. The file itself needs to be called `component.js`. A component needs to be an object with an `init` method. See this project for examples.
 
@@ -13,12 +19,6 @@ There are some strict conventions...
 3. Each page should have its own bootstrap file: `boostrap-xxx.js` (where `xxx` is the page type or name). This file should include only one `require` call and that should be to the 'app' (see this project for an example) -> no other code of importance to the project should be placed inside that bootstrap file (code for the page should either be a component or a extension that is loaded by `app.js`).
 
 ...that's it.
-
-## Design
-
-The basic API is based off of the [Aura.js](https://github.com/aurajs/aura) project -> but 90% of the API from that project is not replicated here.
-
-I'm looking to create a simplified project boilerplate and NOT a framework (or encompassing suite of tools).
 
 ## Example
 
