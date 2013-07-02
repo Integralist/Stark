@@ -44,6 +44,10 @@ Each page loads its own 'bootstrap' library which fires up the application and l
 
 We rely heavily on the conventions defined above and [Grunt](http://gruntjs.com/) to build (concatenate + minify) our components and extensions into single page specific modules.
 
+To build the page specific modules simply run `grunt`.
+
+### Breakdown of the custom grunt tasks
+
 `grunt` (default task calls `get-components`)  
 `grunt get-components` (builds the r.js configuration object and calls `requirejs`)  
 `grunt requirejs` (executes build and does some clean-up)
