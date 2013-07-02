@@ -53,14 +53,14 @@ module.exports = function (grunt) {
         var done = this.async(),
             requirejs = require('requirejs');
 
-        console.log('\n', requirejs_config);
+        // console.log('\n', requirejs_config);
 
         requirejs.optimize(requirejs_config, function (details) {
-            console.log('\n\n\nBUILD SUCCESSFUL...');
+            console.log('\nBUILD SUCCESSFUL...');
             console.log(details);
             done();
         }, function(err) {
-            console.log('\n\n\nBUILD FAILED...');
+            console.log('\nBUILD FAILED...');
             console.log(err);
             done();
         });
