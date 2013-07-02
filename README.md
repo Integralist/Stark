@@ -65,7 +65,9 @@ require(['app'], function(app) {
 
 ...in development this would asynchronously load both the `blah` extension and any components found within `index.html`.
 
-### The resulting optimised `bootstrap-index`...
+### The resulting concatenated `bootstrap-index`...
+
+Note: this would be minified but for the sake of readability I turned off the minification process.
 
 ```js
 define("bootstrap-index", function(){});
