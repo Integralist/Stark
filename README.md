@@ -1,6 +1,6 @@
 # Stark
 
-Simplified separation of components to being decoupled applications
+Simplified separation of components into decoupled applications
 
 ## Design
 
