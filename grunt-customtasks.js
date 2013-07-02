@@ -79,6 +79,81 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('requirejs', 'build our application using r.js', function(){
+        function variableAssignment() {
+            indexOfFirstComponent = 0, 
+            temp = modules.forEach(function(value, index) {
+                if (/components\/[a-z-.]+\/component/i.test(value) && indexOfFirstComponent === 0) {
+                    indexOfFirstComponent = index;
+                }
+            }), 
+            alphabet = 'abcdefghijklmnopqrstuvwxyz', 
+            components = '(', 
+            i = 0;
+        }
+
+        function constructArguments() {
+            while (i < numberOfModules) {
+                components += alphabet[i] + ',';
+                i++;
+            }
+
+            components = components.substring(0, components.length-1);
+
+            components += '){';
+        }
+
+        function constructComponents() {
+            i = indexOfFirstComponent;
+
+            while (i < numberOfModules) {
+                components += alphabet[i] + '.init();';
+                i++;
+            }
+
+            components += '}';
+        }
+
+        function processScriptContent(script) {
+            return grunt.file.read(script).replace(/require\(\[(.+)\]\);/gi, function(match, cg) {
+                var modules = cg.split(','),
+                    numberOfModules = modules.length,
+                    indexOfFirstComponent = 0, 
+                    temp = modules.forEach(function(value, index) {
+                        if (/components\/[a-z-.]+\/component/i.test(value) && indexOfFirstComponent === 0) {
+                            indexOfFirstComponent = index;
+                        }
+                    }), 
+                    alphabet = 'abcdefghijklmnopqrstuvwxyz', 
+                    components = '(', 
+                    i = 0;
+
+                // Construct our arguments...
+                while (i < numberOfModules) { components += alphabet[i] + ','; i++; }
+                components = components.substring(0, components.length-1);
+                components += '){';
+
+                // Construct our components...
+                i = indexOfFirstComponent;
+                while (i < numberOfModules) { components += alphabet[i] + '.init();'; i++; }
+                components += '}';
+
+                return 'require([' + cg + '], function' + components + ');';
+            });
+        }
+
+        function initialiseComponents() {
+            var scripts = grunt.file.expand('./release/bootstrap-*.js');
+
+            scripts.forEach(function(script) {
+                grunt.file.write(script, processScriptContent(script));
+            });
+        }
+
+        function cleanUp() {
+            grunt.file.delete('./release/app.js');
+            grunt.file.delete('./release/build.txt');
+        }
+
         var done = this.async(),
             requirejs = require('requirejs');
 
@@ -87,6 +162,8 @@ module.exports = function (grunt) {
         requirejs.optimize(requirejs_config, function (details) {
             console.log('\nBUILD SUCCESSFUL...');
             console.log(details);
+            initialiseComponents();
+            cleanUp();
             done();
         }, function(err) {
             console.log('\nBUILD FAILED...');
