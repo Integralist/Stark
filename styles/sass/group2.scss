@@ -1,11 +1,8 @@
 /* =============================================================================
-   Group 1
-   Viewport <= 399px
+   Group 2
+   Viewport >= 400px
    ========================================================================== */
 
-@import 'partials/baseline';
-@import 'partials/core';
-
 body {
-    background-color: red;
+    background-color: yellow;
 }
