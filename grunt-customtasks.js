@@ -79,40 +79,6 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('requirejs', 'build our application using r.js', function(){
-        function variableAssignment() {
-            indexOfFirstComponent = 0, 
-            temp = modules.forEach(function(value, index) {
-                if (/components\/[a-z-.]+\/component/i.test(value) && indexOfFirstComponent === 0) {
-                    indexOfFirstComponent = index;
-                }
-            }), 
-            alphabet = 'abcdefghijklmnopqrstuvwxyz', 
-            components = '(', 
-            i = 0;
-        }
-
-        function constructArguments() {
-            while (i < numberOfModules) {
-                components += alphabet[i] + ',';
-                i++;
-            }
-
-            components = components.substring(0, components.length-1);
-
-            components += '){';
-        }
-
-        function constructComponents() {
-            i = indexOfFirstComponent;
-
-            while (i < numberOfModules) {
-                components += alphabet[i] + '.init();';
-                i++;
-            }
-
-            components += '}';
-        }
-
         function processScriptContent(script) {
             return grunt.file.read(script).replace(/require\(\[(.+)\]\);/gi, function(match, cg) {
                 var modules = cg.split(','),
