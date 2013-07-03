@@ -12,7 +12,20 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
 
-        pkg: grunt.file.readJSON('package.json')
+        pkg: grunt.file.readJSON('package.json'),
+
+        sass: {
+            compile: {
+                options: {
+                    style: 'expanded'
+                },
+                expand: true,
+                cwd: './styles/sass/',
+                src: ['*.scss', '!_*.scss'],
+                dest: './styles/',
+                ext: '.css'
+            }
+        }
 
     });
 
@@ -23,6 +36,6 @@ module.exports = function (grunt) {
 
     require('./grunt-customtasks.js')(grunt);
 
-    grunt.registerTask('default', ['get-components']);
+    grunt.registerTask('build', ['get-components']);
     
 };

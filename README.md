@@ -48,7 +48,7 @@ To build the page specific modules simply run `grunt`.
 
 ### Breakdown of the custom grunt tasks
 
-`grunt` (default task calls `get-components`)  
+`grunt build` (calls custom task `get-components`)  
 `grunt get-components` (builds the r.js configuration object and calls `requirejs`)  
 `grunt requirejs` (executes build and does some clean-up)
 
