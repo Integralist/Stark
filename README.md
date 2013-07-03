@@ -98,3 +98,7 @@ require(["extensions/blah/extension", "components/hello/component", "components/
 });
 
 ```
+
+## Parsing?
+
+In this build script I read the `.html` files looking for components. But if all your components are dynamically inserted server-side by a config file (like BBC News) then you just need to change the build script to look at your config file instead (you'd need to enforce a naming convention to make it easy for the build script to parse the config file)
