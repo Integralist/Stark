@@ -21,12 +21,14 @@ module.exports = function (grunt) {
         }
 
         function getExtensions(page) {
-            var extensions = grunt.file.read('./bootstrap-' + parsePageName(page) + '.js'),
-                match = extensions.match(/app.use\('[a-z-.]+'\);/gmi);
+            var extensionPattern         = /app.use\('[a-z-.]+'\);/gmi,
+                extensionCapturedPattern = /app.use\('([a-z-.]+)'\);/gmi,
+                extensions               = grunt.file.read('./bootstrap-' + parsePageName(page) + '.js'),
+                match                    = extensions.match(extensionPattern);
             
             if (match) {
                 return match.map(function(){
-                    return 'extensions/' + /app.use\('([a-z-.]+)'\);/gmi.exec(extensions)[1] + '/extension';
+                    return 'extensions/' + extensionCapturedPattern.exec(extensions)[1] + '/extension';
                 });
             }
         }
@@ -80,18 +82,23 @@ module.exports = function (grunt) {
 
     grunt.registerTask('requirejs', 'build our application using r.js', function(){
         function processScriptContent(script) {
-            return grunt.file.read(script).replace(/require\(\[(.+)\]\);/gi, function(match, cg) {
+            var modulesCapturedPattern = /require\(\[(.+)\]\);/gi,
+                componentPattern       = /components\/[a-z-.]+\/component/i;
+
+            return grunt.file.read(script).replace(modulesCapturedPattern, function(match, cg) {
                 var modules = cg.split(','),
                     numberOfModules = modules.length,
                     indexOfFirstComponent = 0, 
-                    temp = modules.forEach(function(value, index) {
-                        if (/components\/[a-z-.]+\/component/i.test(value) && indexOfFirstComponent === 0) {
-                            indexOfFirstComponent = index;
-                        }
-                    }), 
                     alphabet = 'abcdefghijklmnopqrstuvwxyz', 
                     components = '(', 
                     i = 0;
+
+                // Find Array index of our first component module...
+                modules.forEach(function(value, index) {
+                    if (componentPattern.test(value) && indexOfFirstComponent === 0) {
+                        indexOfFirstComponent = index;
+                    }
+                });
 
                 // Construct our arguments...
                 while (i < numberOfModules) { components += alphabet[i] + ','; i++; }
@@ -120,22 +127,26 @@ module.exports = function (grunt) {
             grunt.file.delete('./release/build.txt');
         }
 
-        var done = this.async(),
-            requirejs = require('requirejs');
-
-        // console.log('\n', requirejs_config);
-
-        requirejs.optimize(requirejs_config, function (details) {
+        function optimisationSuccess(details) {
             console.log('\nBUILD SUCCESSFUL...');
             console.log(details);
             initialiseComponents();
             cleanUp();
             done();
-        }, function(err) {
+        }
+
+        function optimisationError(err) {
             console.log('\nBUILD FAILED...');
             console.log(err);
             done();
-        });
+        }
+
+        var done = this.async(),
+            requirejs = require('requirejs');
+
+        // console.log('\n', requirejs_config);
+
+        requirejs.optimize(requirejs_config, optimisationSuccess, optimisationError);
     });
 
 };
