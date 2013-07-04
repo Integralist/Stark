@@ -6,6 +6,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Stark</title>
+        <script>
+            // Insert this inline code server-side
+            document.documentElement.className += ' js';
+        </script>
         <link rel="stylesheet" href="styles/project.css">
         <!--[if lte IE 8]>
         <link rel="stylesheet" href="styles/project-ie.css">
@@ -13,7 +17,7 @@
     </head>
     <body>
         <p><a href="index.html">Home</a></p>
-        <div data-component="world"></div>
+        <div data-component="world">World</div>
         <script src="libs/require.js" data-main="bootstrap-about" async></script>
     </body>
 </html>

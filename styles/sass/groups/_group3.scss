@@ -3,8 +3,10 @@
    Viewport >= 600px
    ========================================================================== */
 
-@include respond-min($mq-group3) {
-    body {
-        background-color: green;
+.js {
+    @include respond-min($mq-group3) {
+        body {
+            background-color: green;
+        }
     }
 }

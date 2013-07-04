@@ -14,6 +14,14 @@ Each group inherits the styles from the group before it.
 
 The components encapsulate their own logic for handling viewport dimensions.
 
+## Extra output in our CSS?
+
+In our simplified example it would look like there is a lot of code being generated, but this is because our examples are bad.
+
+In a real project, the styles don't change that much when moving up the break-points. For example, a brand logo will generally look the same across all break-points with the exception that it might be floated or positioned different on desktop sized device compared to the rest of the devices you're testing against.
+
+So don't take the generated CSS output from this repo as a representation of your own project.
+
 ## JavaScript Design
 
 The basic API is based off of the [Aura.js](https://github.com/aurajs/aura) project, but 99% of that API is not replicated here.
@@ -117,8 +125,4 @@ In this build script I read the `.html` files looking for components. But if all
 
 ## TODO
 
-- Look at Sass building all stylesheets into 1 stylesheet for HTML.
-- Make sure that Group 1-4 only loads styles when JS is enabled? Currently loads all the time
-- Make sure that we're not duplicating styles for each group/media query
-- Using `old-ie` mixin pattern to generate 1 stylesheet for IE
 - Implement Mediator pattern
