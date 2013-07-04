@@ -3,9 +3,36 @@
    Viewport <= 399px
    ========================================================================== */
 
+/* =============================================================================
+   Dependencies
+   Because we're using inheritance for our CSS loading strategy, 
+   it means we can import all required dependencies in the group1 Sass 
+   file and have that cascade down into the other Sass files
+   ========================================================================== */
+
+@import 'partials/media-queries';
+@import 'partials/variables';
 @import 'partials/baseline';
 @import 'partials/core';
+
+/* =============================================================================
+   Layout
+   The core structure and layout of the site for Group 1 devices should be 
+   defined in this file (this includes things like header/navigation/footer)
+   Anything else should be imported as a 'component'
+   ========================================================================== */
 
 body {
     background-color: red;
 }
+
+/* =============================================================================
+   Components
+   You only need to import components in this Group 1 file.
+   Components have been built to be self contained.
+   This means they encapsulate any logic about viewport dimensions.
+   This allows them to control their own visual display.
+   ========================================================================== */
+
+@import 'components/hello';
+@import 'components/world';
