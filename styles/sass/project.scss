@@ -1,38 +1,39 @@
 /* =============================================================================
-   Group 1
-   Viewport <= 399px
-   ========================================================================== */
-
-/* =============================================================================
    Dependencies
    Because we're using inheritance for our CSS loading strategy, 
    it means we can import all required dependencies in the group1 Sass 
    file and have that cascade down into the other Sass files
    ========================================================================== */
 
-@import 'partials/media-queries';
-@import 'partials/variables';
-@import 'partials/baseline';
-@import 'partials/core';
+   @import 'partials/variables';
+   @import 'partials/utils';
+   @import 'partials/baseline';
 
 /* =============================================================================
-   Layout
-   The core structure and layout of the site for Group 1 devices should be 
-   defined in this file (this includes things like header/navigation/footer)
-   Anything else should be imported as a 'component'
+   Core
+   This is the experience for either really old devices, or non-js devices
    ========================================================================== */
 
-body {
-    background-color: red;
-}
+   @import 'partials/core';
+
+/* =============================================================================
+   Groups
+   Any design enhancements that aren't a separate component and aren't part 
+   of the core experience should be placed within one of the following groups
+   ========================================================================== */
+
+   @import 'groups/group1';
+   @import 'groups/group2';
+   @import 'groups/group3';
+   @import 'groups/group4';
 
 /* =============================================================================
    Components
-   You only need to import components in this Group 1 file.
+   You only need to import components into the top-level project/project-ie files
    Components have been built to be self contained.
    This means they encapsulate any logic about viewport dimensions.
    This allows them to control their own visual display.
    ========================================================================== */
 
-@import 'components/hello';
-@import 'components/world';
+   @import 'components/hello';
+   @import 'components/world';

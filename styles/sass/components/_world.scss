@@ -6,19 +6,19 @@
 [data-component="world"] {
     border: 1px solid blue;
 
-    @include mq($mq-group2) {
+    @include respond-min($mq-group2) {
         & {
             border: 1px solid green;
         }
     }
 
-    @include mq($mq-group3) {
+    @include respond-min($mq-group3) {
         & {
             border: 1px solid yellow;
         }
     }
 
-    @include mq($mq-group4) {
+    @include respond-min($mq-group4) {
         & {
             border: 1px solid red;
         }

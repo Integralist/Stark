@@ -1,5 +1,0 @@
-@mixin mq($group) {
-    @media (min-width: $group) {
-        @content;
-    }
-}

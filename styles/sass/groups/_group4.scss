@@ -1,8 +1,10 @@
 /* =============================================================================
-   Group 2
-   Viewport >= 400px
+   Group 4
+   Viewport >= 1008px
    ========================================================================== */
 
-body {
-    background-color: yellow;
+@include respond-min($mq-group4) {
+    body {
+        background-color: blue;
+    }
 }

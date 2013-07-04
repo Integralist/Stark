@@ -2,13 +2,25 @@
 
 Simplified separation of components into decoupled applications
 
-## Design
+## CSS Design
+
+We're using an inheritance pattern, which means we have the following files:
+
+- core experience (for non-js devices)
+- groups 1-4 (enhanced core experience for js-enabled devices)
+- components (all other functionality)
+
+Each group inherits the styles from the group before it.
+
+The components encapsulate their own logic for handling viewport dimensions.
+
+## JavaScript Design
 
 The basic API is based off of the [Aura.js](https://github.com/aurajs/aura) project, but 99% of that API is not replicated here.
 
 I'm looking to create a simplified project boilerplate and NOT a framework (or encompassing suite of tools).
 
-## Conventions
+## JavaScript Conventions
 
 There are three conventions that need to be adhered to...
 
@@ -20,7 +32,7 @@ There are three conventions that need to be adhered to...
 
 ...that's it.
 
-## Example
+## JavaScript Example
 
 In this example project we have two pages:
 
@@ -106,5 +118,6 @@ In this build script I read the `.html` files looking for components. But if all
 ## TODO
 
 - Look at Sass building all stylesheets into 1 stylesheet for HTML.
+- Make sure that Group 1-4 only loads styles when JS is enabled? Currently loads all the time
 - Using `old-ie` mixin pattern to generate 1 stylesheet for IE
 - Implement Mediator pattern
