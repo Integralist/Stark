@@ -1,8 +1,5 @@
 /* =============================================================================
-   Dependencies
-   Because we're using inheritance for our CSS loading strategy, 
-   it means we can import all required dependencies in the group1 Sass 
-   file and have that cascade down into the other Sass files
+   Base Utilities
    ========================================================================== */
 
    @import 'partials/variables';
@@ -19,7 +16,10 @@
 /* =============================================================================
    Groups
    Any design enhancements that aren't a separate component and aren't part 
-   of the core experience should be placed within one of the following groups
+   of the core experience should be placed within one of the following groups.
+
+   Note: we're using inheritance for our CSS loading strategy which means each
+   stylesheet inherits styles from the group that came before it
    ========================================================================== */
 
    @import 'groups/group1';
