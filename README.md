@@ -119,5 +119,6 @@ In this build script I read the `.html` files looking for components. But if all
 
 - Look at Sass building all stylesheets into 1 stylesheet for HTML.
 - Make sure that Group 1-4 only loads styles when JS is enabled? Currently loads all the time
+- Make sure that we're not duplicating styles for each group/media query
 - Using `old-ie` mixin pattern to generate 1 stylesheet for IE
 - Implement Mediator pattern
