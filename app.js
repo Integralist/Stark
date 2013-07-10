@@ -3,11 +3,17 @@ define(['require'], function(require) {
 
     App.prototype.use = function(extension) {
         console.log('use extension:', extension);
-        require(['extensions/' + extension + '/extension']);
+        
+        var limit = arguments.length;
+
+        while (limit--) {
+            require(['extensions/' + arguments[limit] + '/extension']);
+        }
     }
 
     App.prototype.start = function() {
         console.log('start application');
+        
         var components = document.querySelectorAll('[data-component]'),
             limit = components.length;
 
@@ -17,6 +23,8 @@ define(['require'], function(require) {
             });
         }
     }
+
+    window.app = {};
 
     return new App();
 });
