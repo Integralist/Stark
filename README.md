@@ -1,6 +1,8 @@
 # Stark
 
-Simplified separation of components into decoupled applications
+Simplified separation of components into decoupled applications.
+
+This isn't a framework (or all-encompassing suite of tools). It is a 'strategy', a pattern for handling the architecture of your code. I feel this particular strategy works very well and keeps code simple and decoupled and performant (through the use of a custom build script).
 
 ## CSS Design
 
