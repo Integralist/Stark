@@ -146,4 +146,5 @@ The app.js module declares `window.app` (which is an object you can hook onto). 
 
 ## TODO
 
+- Move from Sass to Stylus
 - Integrate Mediator pattern into new components to demonstrate how they can work
