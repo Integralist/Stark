@@ -8,19 +8,37 @@
 
     @include respond-min($mq-group2) {
         & {
-            border: 1px solid green;
+            border-color: green;
+        }
+
+        @include old-ie {
+            & {
+                border-width: 2px;
+            }
         }
     }
 
     @include respond-min($mq-group3) {
         & {
-            border: 1px solid yellow;
+            border-color: yellow;
+        }
+
+        @include old-ie {
+            & {
+                border-width: 2px;
+            }
         }
     }
 
     @include respond-min($mq-group4) {
         & {
-            border: 1px solid red;
+            border-color: red;
+        }
+
+        @include old-ie {
+            & {
+                border-width: 2px;
+            }
         }
     }
 }
