@@ -24,6 +24,93 @@ In a real project, the styles don't change that much when moving up the break-po
 
 So don't take the generated CSS output from this repo as a representation of your own project.
 
+## Stylus conventions
+
+### Mixins and Functions
+
+Mixins and Functions are syntaxically the same. The difference comes in how they are invoked. 
+
+```
+body
+    padding: x(1, 2) // this is a function
+    y(1, 2)          // this is a mixin
+```
+
+So if you assign `x(y,z)` as a value of a property then `x` is invoked as a function (and thus the code inside `x` should be written in such a way that it returns a value -> like Ruby the last expression is the returned value), otherwise if you just write out `x()` then it's invoked as a mixin and so the code inside `x` needs to be written like a mixin.
+
+### Brackets, colons, semi-colons
+
+When you're using if statements inside of Mixins and Functions, then it becomes impossible for the Mixin/Function to have a bracket for just the outside container (I tried but the compiler gets confused and so you have to have brackets for all the code inside the mixin which just means too much 'visual noise').
+
+So we omit brackets completely from them.
+
+Properties should always have a colon, and shouldn't have a semi-colon...
+
+```
+body {
+    padding: 10px // good -> uses a colon and doesn't have a semi-colon
+    margin 10px;  // bad -> uses a semi-colon and doesn't have a colon
+}
+```
+
+Any conditionals (such as `if`) and any `@media` rules should omit brackets.
+
+### Avoid extending classes and extend from a placeholder instead
+
+Don't do...
+
+```
+red = #E33E1E
+yellow = #E2E21E
+
+.message
+    padding: 10px
+    font: 14px Helvetica
+    border: 1px solid #eee
+
+.warning
+    @extends .message
+    border-color: yellow
+    background: yellow + 70%
+
+.error
+    @extends .message
+    border-color: red
+    background: red + 70%
+
+.fatal
+    @extends .error
+    font-weight: bold
+    color: red
+```
+
+Instead, do this...
+
+```
+red = #E33E1E
+yellow = #E2E21E
+
+$message
+    padding: 10px
+    font: 14px Helvetica
+    border: 1px solid #eee
+
+.warning
+    @extends $message
+    border-color: yellow
+    background: yellow + 70%
+
+.error
+    @extends $message
+    border-color: red
+    background: red + 70%
+
+.fatal
+    @extends .error
+    font-weight: bold
+    color: red
+```
+
 ## JavaScript Design
 
 The basic API is based off of the [Aura.js](https://github.com/aurajs/aura) project, but 99% of that API is not replicated here.
@@ -146,5 +233,6 @@ The app.js module declares `window.app` (which is an object you can hook onto). 
 
 ## TODO
 
-- Move from Sass to Stylus
+- Move from Sass to Stylus (FIND OUT HOW TO PASS @content blocks to mixins/functions)
+- Write custom task to update Stylus lineno value for distribution
 - Integrate Mediator pattern into new components to demonstrate how they can work

@@ -1,0 +1,34 @@
+fix-mqs ?= false
+
+respond-min(width, content)
+    test: content
+    // // If we're outputting for a fixed media query set...
+    // if fix-mqs
+    //     // ...and if we should apply these rules...
+    //     if $fix-mqs >= width
+    //         // ...output the content the user gave us.
+    //         @content
+    // else
+    //     // Otherwise, output it using a regular media query
+    //     @media all and (min-width: width)
+    //         @content
+
+respond-max(width)
+    // If we're outputting for a fixed media query set...
+    if fix-mqs
+        // ...and if we should apply these rules...
+        if fix-mqs <= width
+            // ...output the content the user gave us.
+            @content
+    else
+        // Otherwise, output it using a regular media query
+        @media all and (max-width: width)
+            @content
+
+old-ie ?= false
+
+ie-content()
+    // Only use this content if we're dealing with old IE
+    // In the `project-ie.scss` file we set this variable to `true`
+    if old-ie
+        @content

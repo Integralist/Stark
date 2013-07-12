@@ -1,0 +1,23 @@
+/* =============================================================================
+   Component: Hello
+   Does ABC
+   ========================================================================== */
+
+group(color)
+    1px solid color
+
+[data-component="hello"]
+    border: 1px solid blue
+
+body
+    respond-min(mq-group2, group(green))
+
+    // respond-min(mq-group3) {
+    //     &
+    //         border: 1px solid yellow
+    // }
+
+    // respond-min(mq-group4) {
+    //     &
+    //         border: 1px solid red
+    // }

@@ -1,0 +1,39 @@
+/* =============================================================================
+   Base Utilities
+   ========================================================================== */
+
+@import 'partials/variables'
+@import 'partials/utils'
+@import 'partials/baseline'
+
+/* =============================================================================
+   Core
+   This is the experience for either really old devices, or non-js devices
+   ========================================================================== */
+
+@import 'partials/core'
+
+/* =============================================================================
+   Groups
+   Any design enhancements that aren't a separate component and aren't part 
+   of the core experience should be placed within one of the following groups.
+
+   Note: we're using inheritance for our CSS loading strategy which means each
+   stylesheet inherits styles from the group that came before it
+   ========================================================================== */
+
+@import 'groups/group1'
+@import 'groups/group2'
+@import 'groups/group3'
+@import 'groups/group4'
+
+/* =============================================================================
+   Components
+   You only need to import components into the top-level project/project-ie files
+   Components have been built to be self contained.
+   This means they encapsulate any logic about viewport dimensions.
+   This allows them to control their own visual display.
+   ========================================================================== */
+
+@import 'components/hello'
+@import 'components/world'
