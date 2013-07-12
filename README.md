@@ -12,7 +12,7 @@ We're using an inheritance pattern, which means we have the following files:
 - groups 1-4 (enhanced core experience for js-enabled devices)
 - components (all other functionality)
 
-Each group inherits the styles from the group before it.
+Each 'group' inherits the styles from the group before it.
 
 The components encapsulate their own logic for handling viewport dimensions.
 
