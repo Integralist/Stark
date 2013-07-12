@@ -9,10 +9,8 @@
     @include respond-min($mq-group2) {
         & {
             border-color: green;
-        }
 
-        @include old-ie {
-            & {
+            @include old-ie {
                 border-width: 2px;
             }
         }
@@ -21,11 +19,9 @@
     @include respond-min($mq-group3) {
         & {
             border-color: yellow;
-        }
 
-        @include old-ie {
-            & {
-                border-width: 2px;
+            @include old-ie {
+                border-width: 3px;
             }
         }
     }
@@ -33,11 +29,9 @@
     @include respond-min($mq-group4) {
         & {
             border-color: red;
-        }
 
-        @include old-ie {
-            & {
-                border-width: 2px;
+            @include old-ie {
+                border-width: 4px;
             }
         }
     }
