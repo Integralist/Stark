@@ -172,6 +172,6 @@ The app.js module declares `window.app` (which is an object you can hook onto). 
 ## TODO
 
 - Integrate Mediator pattern into new components to demonstrate how they can work
-- Fix bug in build script where it can't locate paths defined inside the config (seems to go into wrong directory -> using a dirty hack to work around this)
+- Fix bug in build script where it can't locate paths defined inside the config (seems to go into wrong directory)
 - Fix issue with build script where we grab references to all components where we should only be getting references to components on a specific page (this is a flaw that I'm not sure yet how to resolve as we're using a r.js' `wrap` property to inject the global property at the top of the concatenated file)
 - Move from Sass to Stylus (can't do until Stylus gets support for passing code blocks)
