@@ -7,6 +7,9 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('get-components', 'Parse each HTML file for components', function() {
+        var _ = require('lodash'),
+            storedModules = [];
+
         function parsePageName(page) {
             return /\.\/(\w+)\.html/.exec(page)[1];
         }
@@ -21,20 +24,50 @@ module.exports = function (grunt) {
         }
 
         function getExtensions(page) {
-            var extensionPattern         = /app.use\('[a-z-.]+'\);/gmi,
-                extensionCapturedPattern = /app.use\('([a-z-.]+)'\);/gmi,
-                extensions               = grunt.file.read('./bootstrap-' + parsePageName(page) + '.js'),
-                match                    = extensions.match(extensionPattern);
-            
-            if (match) {
-                return match.map(function(){
-                    return 'extensions/' + extensionCapturedPattern.exec(extensions)[1] + '/extension';
+            var i                        = -1,
+                extensionPattern         = /app.use\((?:'[a-z-.]+'(?:,\s*)?)+\);/gmi,
+                extensionCapturedPattern = /app.use\('([a-z-.]+)'(?:\s*,\s*'([a-z-.]+)')*\);/gmi,
+                fileContent              = grunt.file.read('./bootstrap-' + parsePageName(page) + '.js'),
+                match                    = fileContent.match(extensionPattern),
+                extensions               = [],
+                capturedExtensions       = extensionCapturedPattern.exec(fileContent).splice(1).filter(function(item){
+                    // filter out an undefined values
+                    if (item) {
+                        return true;
+                    }
                 });
+
+            if (match) {
+                while (++i < capturedExtensions.length) {
+                    extensions.push('extensions/' + capturedExtensions[i] + '/extension');
+                }
+
+                return extensions;
             }
         }
 
+        function buildComponentsList() {
+            var app_start = 'window.app={',
+                app_end = '};',
+                components_start = 'components:{',
+                components_end = '}',
+                globalProperty;
+            
+            storedModules = _.uniq(storedModules); // remove duplicate items
+
+            storedModules = storedModules.map(function(item) {
+                var componentName = /components\/(.+)\/component/.exec(item);
+                return '"' + componentName[1] + '": document.getElementById("js-component-' + componentName[1] + '")';
+            });
+
+            globalProperty = app_start + components_start + storedModules.join(',') + components_end + app_end;
+
+            return globalProperty;
+        }
+
         function buildConfig() {
-            var pages = grunt.file.expand('./*.html');
+            var pages = grunt.file.expand('./*.html'),
+                setWindowApp = false;
 
             pages = pages.map(function(page) {
                 var modules    = getModules(page),
@@ -44,6 +77,8 @@ module.exports = function (grunt) {
                 if (extensions) {
                     toBeLoaded = extensions.concat(modules);
                 }
+
+                storedModules = storedModules.concat(modules);
 
                 return {
                     name: 'bootstrap-' + /\.\/([^.]+)/.exec(page)[1],
@@ -57,7 +92,7 @@ module.exports = function (grunt) {
             // https://github.com/jrburke/r.js/blob/master/build/example.build.js
             requirejs_config = {
                 baseUrl: './',
-                dir: './release/',
+                dir: 'release',
                 paths: {
                     jquery: 'libs/jquery'
                 },
@@ -65,8 +100,11 @@ module.exports = function (grunt) {
                 optimize: 'none',
                 removeCombined: true,
                 modules: pages,
+                wrap: {
+                    start: buildComponentsList()
+                },
                 onBuildRead: function (moduleName, path, contents) {
-                    if (path.indexOf('bootstrap-') !== -1 || path.indexOf('/app.js') !== -1) {
+                    if (path.indexOf('bootstrap-') !== -1 || path.indexOf('/app.js') !== -1) { // we purposely want to avoid including any modules that match this condition
                         return '';
                     } else {
                         return contents;

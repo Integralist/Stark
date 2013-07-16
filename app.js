@@ -1,4 +1,8 @@
 define(['require'], function(require) {
+    window.app = {
+        components: {}
+    };
+
     function App() {}
 
     App.prototype.use = function(extension) {
@@ -15,16 +19,19 @@ define(['require'], function(require) {
         console.log('start application');
         
         var components = document.querySelectorAll('[data-component]'),
-            limit = components.length;
+            limit = components.length,
+            componentName;
 
         while (limit--) {
-            require(['components/' + components[limit].getAttribute('data-component') + '/component'], function(component) {
+            componentName = components[limit].getAttribute('data-component');
+
+            window.app.components[componentName] = components[limit];
+
+            require(['components/' + componentName + '/component'], function(component) {
                 component.init();
             });
         }
     }
-
-    window.app = {};
 
     return new App();
 });

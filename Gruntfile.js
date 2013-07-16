@@ -8,6 +8,7 @@ module.exports = function (grunt) {
             npm install grunt-contrib-uglify --save-dev
             npm install grunt-contrib-sass --save-dev
             npm install requirejs --save-dev
+            npm install lodash --save-dev
     */
 
     grunt.initConfig({
