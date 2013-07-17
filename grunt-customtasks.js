@@ -96,7 +96,7 @@ module.exports = function (grunt) {
                 paths: {
                     jquery: 'libs/jquery'
                 },
-                fileExclusionRegExp: /^\.|node_modules|Gruntfile|grunt-|libs|\.md|package.json/,
+                fileExclusionRegExp: /^\.|node_modules|Gruntfile|grunt-|\.md|package.json/,
                 optimize: 'none',
                 removeCombined: true,
                 modules: pages,
