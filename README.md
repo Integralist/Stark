@@ -4,9 +4,60 @@ Simplified separation of components into decoupled applications.
 
 This isn't a framework (or all-encompassing suite of tools). It is a 'strategy', a pattern for handling the architecture of your code. I feel this particular strategy works very well and keeps code simple and decoupled and performant (through the use of a custom build script).
 
-We do require you to implement a few conventions for the build script to work properly. We're not talking Ruby on Rails level of 'convention over configuration', but just a few small conventions need to be adhered to and luckily none of them are confusing or complicated. 
+## API
 
-I detail them more below, but in summary the conventions are...
+- `app.use('extension', 'extension', 'extension')` loads specified extensions
+- `a.start()` goes through the HTML looking for components to load
+
+## Example
+
+HTML...
+
+```
+<div data-component="hello" id="js-component-hello">hello</div>
+<div data-component="world" id="js-component-world">world</div>
+<script src="libs/require.js" data-main="bootstrap-about" async></script>
+```
+
+Bootstrap... 
+
+```
+require(['app', 'configuration'], function(app) {
+    app.use('mediator', 'extension-a', 'extension-b');
+    app.start();
+});
+```
+
+Component...
+
+```
+define({
+    init: function() {
+        console.log('an example component');
+    }
+});
+```
+
+Extension...
+
+```
+// Silly example
+define(function(){
+    if (!String.prototype.blah) {
+        String.prototype.blah = function() {
+            return this + ' BLAH!';
+        };
+    }
+});
+```
+
+## Conventions
+
+We do require you to implement a few conventions (for the build script to work properly). 
+
+We're not talking Ruby on Rails level of 'convention over configuration', but just a few small conventions need to be adhered to and luckily none of them are confusing or complicated. 
+
+I clarify them in more detail later, but in summary the conventions are...
 
 - HTML components need a `data-attribute` and an `id`
 - The data attribute needs to be like: `data-component="xxx"`
@@ -35,7 +86,7 @@ The components encapsulate their own logic for handling viewport dimensions.
 
 ## Extra output in our CSS?
 
-In our simplified example it would look like there is a lot of code being generated, but this is because our examples are bad.
+In our simplified example it would look like there is a lot of code being generated, but this is because our examples aren't great.
 
 In a real project, the styles don't change that much when moving up the break-points. For example, a brand logo will generally look the same across all break-points with the exception that it might be floated or positioned different on desktop sized device compared to the rest of the devices you're testing against.
 
@@ -93,7 +144,7 @@ Each page loads its own 'bootstrap' library which fires up the application and l
 
 We rely heavily on the conventions defined above and [Grunt](http://gruntjs.com/) to build (concatenate + minify) our components and extensions into single page specific modules.
 
-To build the page specific modules simply run `grunt`.
+To build the page specific modules simply run `grunt build`.
 
 ### Breakdown of the custom grunt tasks
 
@@ -103,63 +154,138 @@ To build the page specific modules simply run `grunt`.
 
 ## Example of optimised code
 
-### Original `bootstrap-index`...
+### Original `bootstrap-about`...
 
 ```js
-require(['app'], function(app) {
-    app.use('blah');
+require(['app', 'configuration'], function(app) {
+    app.use('blah', 'mediator');
     app.start();
 });
 ```
 
-...in development this would asynchronously load both the `blah` extension and any components found within `index.html`.
+...in development this would asynchronously load both the `blah` and `mediator` extensions and any components found within `index.html`.
 
-### The resulting concatenated `bootstrap-index`...
+### The resulting concatenated `bootstrap-about`...
 
 Note: this would be minified but for the sake of readability I turned off the minification process.
 
 ```js
-define("bootstrap-index", function(){});
+window.app = {
+    components: {
+        "world": document.getElementById("js-component-world"),
+        "contacts": document.getElementById("js-component-contacts"),
+        "hello": document.getElementById("js-component-hello")
+    }
+};
 
-define('extensions/blah/extension',[],function(){
+define("bootstrap-about", function () {});
+
+define('extensions/blah/extension', [], function () {
     if (!String.prototype.blah) {
-        String.prototype.blah = function() {
+        String.prototype.blah = function () {
             return this + ' BLAH!';
         };
     }
 });
 
-define('components/hello/component',{
-    init: function() {
-        console.log('hello component initialised'.blah());
-    }
+define('extensions/mediator/extension', [], function () {
+    var mediator = (function () {
+        var subscribe = function (channel, fn) {
+            if (!mediator.channels[channel]) {
+                mediator.channels[channel] = [];
+            }
+
+            mediator.channels[channel].push({
+                context: this,
+                callback: fn
+            });
+
+            return this;
+        },
+
+            publish = function (channel) {
+                if (!mediator.channels[channel]) {
+                    return false;
+                }
+
+                var args = Array.prototype.slice.call(arguments, 1);
+
+                for (var i = 0, l = mediator.channels[channel].length; i < l; i++) {
+                    var subscription = mediator.channels[channel][i];
+                    subscription.callback.apply(subscription.context, args);
+                }
+
+                return this;
+            };
+
+        return {
+            channels: {},
+            publish: publish,
+            subscribe: subscribe,
+            wrap: function (obj) {
+                obj.subscribe = subscribe;
+                obj.publish = publish;
+            }
+        };
+
+    }());
+
+    window.app.mediator = mediator;
+
+    return mediator;
 });
 
-define('components/world/component',{
-    init: function() {
+define('components/world/component', {
+    init: function () {
         console.log('world component initialised');
+
+        if (window.app.mediator) {
+            console.log('app.mediator', app.mediator);
+        }
     }
 });
 
-require(["extensions/blah/extension", "components/hello/component", "components/world/component"], function(a,b,c){
-    b.init();
-    c.init();
-});
+/*!
+ * jQuery JavaScript Library v2.0.3 -sizzle,-event-alias,-effects,-deprecated
+ * http://jquery.com/
+ *
+ * Includes Sizzle.js
+ * http://sizzlejs.com/
+ *
+ * Copyright 2005, 2013 jQuery Foundation, Inc. and other contributors
+ * Released under the MIT license
+ * http://jquery.org/license
+ *
+ * Date: 2013-07-07T17:13Z
+ */
+(function (window, undefined) {
 
+    // jQuery code
+
+})(window);
+
+define('components/contacts/component', ['jquery'], function ($) {
+    return {
+        init: function () {
+            this.container = window.app.components.contacts;
+        }
+    };
+});
+require(["extensions/blah/extension", "extensions/mediator/extension", "components/world/component", "components/contacts/component"], function (a, b, c, d) {
+    c.init();
+    d.init();
+});
 ```
 
 ## Parsing?
 
-In this build script I read the `.html` files looking for components. But if all your components are dynamically inserted server-side by a config file (like BBC News) then you just need to change the build script to look at your config file instead (you'd need to enforce a naming convention to make it easy for the build script to parse the config file)
-
-## API
-
-- `app.use('extension', 'extension', 'extension')` loads specified extensions
-- `a.start()` goes through the HTML looking for components to load
+In this build script I read the `.html` files looking for components. But if all your components are dynamically inserted server-side by a config file (like BBC News) then you would need to change the build script to look at a config file and parse that type of file instead (you'd also need to enforce a naming convention to make it easy for the build script to parse the config file)
 
 ## Component usage
 
-It's fine for Components to specify their own dependencies. So if all your dependencies require jQuery then it's ok to specifically inject that dependency into each module. When it comes to running the build script the jQuery module will only be included once, and being explicit with your dependencies means the component is easier to move into another project as the dependencies are clearly stated.
+It's fine for Components to specify their own dependencies. So if all your dependencies require jQuery then it's ok to specifically inject that dependency into each module. 
+
+When it comes to running the build script the jQuery module will only be included once, and being explicit with your dependencies means the component is easier to move into another project as the dependencies are clearly stated.
 
 ## Extension usage
 
@@ -170,5 +296,5 @@ The app.js module declares `window.app` (which is an object you can hook onto). 
 ## TODO
 
 - Integrate Mediator pattern into new components to demonstrate how they can work
-- Fix issue with build script where we grab references to all components where we should only be getting references to components on a specific page (this is a flaw that I'm not sure yet how to resolve as we're using a r.js' `wrap` property to inject the global property at the top of the concatenated file)
+- Fix issue with build script where we grab references to all components where we should only be getting references to components on a specific page (this is a flaw that I'm not sure yet how to resolve as we're using a r.js' `wrap` property to inject the global property at the top of the concatenated file) -> Possibly, use `wrap` to inject the window.app.component and then for each bootstrap-xxx read we determine the component elements to grab
 - Move from Sass to Stylus (can't do until Stylus gets support for passing code blocks)
