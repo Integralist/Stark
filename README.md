@@ -7,7 +7,7 @@ This isn't a framework (or all-encompassing suite of tools). It is a 'strategy',
 ## API
 
 - `app.use('extension', 'extension', 'extension')` loads specified extensions
-- `a.start()` goes through the HTML looking for components to load
+- `app.start()` goes through the HTML looking for components to load
 
 ## Example
 
