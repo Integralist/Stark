@@ -13,7 +13,7 @@ This isn't a framework (or all-encompassing suite of tools). It is a 'strategy',
 
 HTML...
 
-```
+```html
 <div data-component="hello" id="js-component-hello">hello</div>
 <div data-component="world" id="js-component-world">world</div>
 <script src="libs/require.js" data-main="bootstrap-about" async></script>
@@ -21,7 +21,7 @@ HTML...
 
 Bootstrap... 
 
-```
+```js
 require(['app', 'configuration'], function(app) {
     app.use('mediator', 'extension-a', 'extension-b');
     app.start();
@@ -30,7 +30,7 @@ require(['app', 'configuration'], function(app) {
 
 Component...
 
-```
+```js
 define({
     init: function() {
         console.log('an example component');
@@ -40,7 +40,7 @@ define({
 
 Extension...
 
-```
+```js
 // Silly example
 define(function(){
     if (!String.prototype.blah) {
