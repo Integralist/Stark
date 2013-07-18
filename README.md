@@ -153,8 +153,7 @@ Note: this would be minified but for the sake of readability I turned off the mi
 window.app = {
     components: {
         "world": document.getElementById("js-component-world"),
-        "contacts": document.getElementById("js-component-contacts"),
-        "hello": document.getElementById("js-component-hello")
+        "contacts": document.getElementById("js-component-contacts")
     }
 };
 
