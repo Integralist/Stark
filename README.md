@@ -141,6 +141,8 @@ To build the page specific modules simply run `grunt build`.
 <div data-component="contacts" id="js-component-contacts"></div>
 ```
 
+note: the `contacts` component has a dependency on jQuery
+
 ### Original `bootstrap-about`...
 
 ```js
