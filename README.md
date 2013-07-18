@@ -295,6 +295,6 @@ The app.js module declares `window.app` (which is an object you can hook onto). 
 
 ## TODO
 
-- Integrate Mediator pattern into new components to demonstrate how they can work
 - Fix issue with build script where we grab references to all components where we should only be getting references to components on a specific page (this is a flaw that I'm not sure yet how to resolve as we're using a r.js' `wrap` property to inject the global property at the top of the concatenated file) -> Possibly, use `wrap` to inject the window.app.component and then for each bootstrap-xxx read we determine the component elements to grab
+- Start building out common components based on BBC News website -> ensuring they are flexible and adaptable to different break-points and that they communicate efficiently via the mediator communication object.
 - Move from Sass to Stylus (can't do until Stylus gets support for passing code blocks)
