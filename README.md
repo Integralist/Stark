@@ -152,7 +152,7 @@ To explain: a pattern is a combination of HTML and CSS. Think of the [media obje
 
 Now our version of the media object has the image placed above the text content by default. Not everywhere we use this pattern is going to want the image above the text. 
 
-So imagine we now have 'component-a' and 'component-b'. Component 'a' is a list of media objects. Component 'b' is also a list of media objects. But component 'a' will display the objects in a grid format as the screen gets larger, where as component 'b' will still the objects in a list but the image will instead be floated left of the text content and not placed above it.
+So imagine we now have 'component-a' and 'component-b'. Component 'a' is a list of media objects. Component 'b' is also a list of media objects. Whilst component 'a' will display the objects in a grid format (as the screen gets larger), component 'b' will keep the objects in a list but instead will place the image on the left side of the text content and not placed above it.
 
 So any changes to the pattern itself should be handled by the pattern's own code, via the use of a 'modifier' (see writing CSS using B.E.M if you've not heard of Block, Element, Modifier before).
 
