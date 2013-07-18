@@ -100,6 +100,8 @@ The components encapsulate their own logic for handling viewport dimensions.
 
 We utilise the same grid system as suggested by the [BBC GEL guidelines](http://www.bbc.co.uk/gel). Feel free to discard it and use your own grid if you so choose, but we've included it for any one who might find it useful.
 
+We don't use grids very often because they don't respond well (not easily anyway, not without much tweaking) in a responsive layout. For example, if you have a grid of three columns and they should display in a linear one column layout when on mobile, you then need to overwrite the specific column widths... that's messy and so we have limited use for them.
+
 ## Browser support
 
 The only thing we're using which will be a concern to some of you is the `box-sizing` property. Which means IE8+ is all good. If you're still supporting IE7... well, I'm sorry.
