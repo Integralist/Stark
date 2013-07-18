@@ -154,7 +154,7 @@ Now our version of the media object has the image placed above the text content 
 
 So imagine we now have 'component-a' and 'component-b'. Component 'a' is a list of media objects. Component 'b' is also a list of media objects. Whilst component 'a' will display the objects in a grid format (as the screen gets larger), component 'b' will keep the objects in a list but instead will place the image on the left side of the text content and not placed above it.
 
-So any changes to the pattern itself should be handled by the pattern's own code, via the use of a 'modifier' (see writing CSS using B.E.M if you've not heard of Block, Element, Modifier before).
+So the way we see it: any changes to the pattern itself (such as the image being placed on the left of the text, rather than above it) should be handled by the pattern's own code. Specifically via the use of a 'modifier' class (if you're not sure what that means then look up writing CSS using B.E.M notation).
 
 Any changes to the layout of that pattern should be handled by the component.
 
