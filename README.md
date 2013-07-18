@@ -4,6 +4,25 @@ Simplified separation of components into decoupled applications.
 
 This isn't a framework (or all-encompassing suite of tools). It is a 'strategy', a pattern for handling the architecture of your code. I feel this particular strategy works very well and keeps code simple and decoupled and performant (through the use of a custom build script).
 
+## Table of contents
+
+- [API](#api)
+- [Example](#example)
+- [Conventions](#conventions)
+- [CSS Design](#css-design)
+- [Components vs Patterns?](#components-vs-patterns)
+- [Grid System](#grid-system)
+- [Browser support](#browser-support)
+- [Extra output in our CSS?](#extra-output-in-our-css)
+- [JavaScript Design](#javascript-design)
+- [JavaScript Conventions](#javascript-conventions)
+- [Build Script](#build-script)
+- [Example of optimised code](#example-of-optimised-code)
+- [Parsing?](#parsing)
+- [Component usage](#component-usage)
+- [Extension usage](#extension-usage)
+- [TODO](#todo)
+
 ## API
 
 - `app.use('extension', 'extension', 'extension')` loads specified extensions
@@ -95,6 +114,32 @@ Through the use of media queries, each 'group' inherits the styles from the grou
 e.g. group 1 sets some styles, group 2 only sets additional styles it needs for that particular break-point, but relies on the group 1 styles that came before it.
 
 The components encapsulate their own logic for handling viewport dimensions.
+
+## Components vs Patterns?
+
+Just to be clear that a 'pattern' and a 'component' are two different things.
+
+A component is a single piece of functionality. If you had a list of news articles then the list could potentially be the component. You're inserting into the page a news listing component.
+
+As part of that component you have individual news stories that all look the same. They are a 'pattern'. We're abstracted the common design elements that make up the component as a whole into a pattern, and that pattern has been written in such a way that it is a reusable chunk of code (as we may find that the pattern we've abstracted is common across a lot of different components).
+
+### Where is the logic held?
+
+The way we're building our components is so that the logic is self-contained (encapsulated). The question that now comes up is: "what about the pattern within the component?".
+
+What this means is, who should hold the logic for determining how the content should look on screen?
+
+We feel that the 'pattern' which is being imported into the 'component' shouldn't determine how it looks at different break points. That should be handled by the component itself.
+
+To explain: a pattern is a combination of HTML and CSS. Think of the [media object as an example](http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/).
+
+Now our version of the media object has the image placed above the text content by default. Not everywhere we use this pattern is going to want the image above the text. 
+
+So imagine we now have 'component-a' and 'component-b'. Component 'a' is a list of media objects. Component 'b' is also a list of media objects. But component 'a' will display the objects in a grid format as the screen gets larger, where as component 'b' will still the objects in a list but the image will instead be floated left of the text content and not placed above it.
+
+So any changes to the pattern itself should be handled by the pattern's own code, via the use of a 'modifier' (see writing CSS using B.E.M if you've not heard of Block, Element, Modifier before).
+
+Any changes to the layout of that pattern should be handled by the component.
 
 ## Grid System
 

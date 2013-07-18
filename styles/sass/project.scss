@@ -8,6 +8,13 @@
    @import 'partials/grid';
 
 /* =============================================================================
+   Patterns
+   These are commond design patterns abstracted into reusable chunks of code
+   ========================================================================== */
+
+   @import 'patterns/media';
+
+/* =============================================================================
    Core
    This is the experience for either really old devices, or non-js devices
    ========================================================================== */
@@ -38,3 +45,5 @@
 
    @import 'components/hello';
    @import 'components/world';
+   @import 'components/features-and-analysis';
+   @import 'components/index';

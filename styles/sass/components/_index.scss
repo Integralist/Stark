@@ -1,0 +1,27 @@
+/* =============================================================================
+   Component: Index
+   List of articles
+   ========================================================================== */
+
+[data-component="index"] {
+    border: 1px solid blue;
+    clear: left;
+
+    @include respond-min($mq-group2) {
+        & {
+            border-color: pink;
+        }
+    }
+
+    @include respond-min($mq-group3) {
+        & {
+            border-color: yellow;
+        }
+    }
+
+    @include respond-min($mq-group4) {
+        & {
+            border-color: red;
+        }
+    }
+}

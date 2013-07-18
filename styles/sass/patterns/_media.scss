@@ -1,0 +1,13 @@
+.media--left {
+    overflow: hidden;
+
+    .media__link {
+        float: left;
+        margin-right: 1em;
+    }
+
+    .media__img {
+        display: block;
+        max-width: 150px;
+    }
+}

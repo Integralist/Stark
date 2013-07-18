@@ -1,0 +1,45 @@
+/* =============================================================================
+   Component: Features & Analysis
+   Distinguishes featured content from standard content
+   ========================================================================== */
+
+[data-component="features-and-analysis"] {
+    border: 1px solid blue;
+
+    @include respond-min($mq-group2) {
+        & {
+            border-color: pink;
+
+            .media {
+                float: left;
+                width: (1 / 2) * 100%;
+            }
+        }
+    }
+
+    @include respond-min($mq-group3) {
+        & {
+            border-color: yellow;
+
+            .media {
+                width: (1 / 3) * 100%;
+            }
+        }
+    }
+
+    @include respond-min($mq-group4) {
+        & {
+            border-color: red;
+
+            .media {
+                width: (1 / 4) * 100%;
+            }
+        }
+    }
+}
+
+// Notice we're only modifying the 'position' of the pattern inside the component, we're not modifying the pattern code itself.
+// If the pattern itself has different layouts then they should be handled by the pattern's own code (e.g. a specific state modifier)
+// You could argue how is what we're doing above any different, but think about it...
+// We're changing the position of the pattern based on the component, so what if every component that uses the pattern had a different set of requirements?
+// We couldn't feasible keep adding component specific requirements into the pattern code.

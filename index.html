@@ -16,9 +16,16 @@
         <![endif]-->
     </head>
     <body>
-        <p><a href="about.html">About</a></p>
-        <div data-component="hello" id="js-component-hello">hello</div>
-        <div data-component="world" id="js-component-world">world</div>
+        <div class="grid">
+            <div class="grid__col grid__col--span12">
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="media-object.html">Media Object</a></li>
+                </ul>
+                <div data-component="hello" id="js-component-hello">hello</div>
+                <div data-component="world" id="js-component-world">world</div>
+            </div>
+        </div>
         <script src="libs/require.js" data-main="bootstrap-index" async></script>
     </body>
 </html>
