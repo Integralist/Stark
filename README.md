@@ -120,26 +120,6 @@ There are few conventions that need to be adhered to...
 
 ...that's it.
 
-## JavaScript Example
-
-In this example project we have two pages:
-
-1. `index.html`
-2. `about.html`
-
-The index page loads two components:
-
-1. 'hello' `<div data-component="hello"></div>`
-2. 'world' `<div data-component="world"></div>`
-
-The about page loads just one component:
-
-'world' `<div data-component="world"></div>`
-
-But the index page also uses a extension called `blah` which modifies the `String` prototype to provide an enhancement required by the index page (in this silly example, our `blah` extension just adds `BLAH!` to the end of a String.
-
-Each page loads its own 'bootstrap' library which fires up the application and loads the relevant extensions and components.
-
 ## Build Script
 
 We rely heavily on the conventions defined above and [Grunt](http://gruntjs.com/) to build (concatenate + minify) our components and extensions into single page specific modules.
