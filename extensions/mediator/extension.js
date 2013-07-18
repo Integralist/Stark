@@ -26,7 +26,7 @@ define(function(){
         obj.publish('nameChange', 'john'); // sam, john
      */
     var mediator = (function(){
-        var subscribe = function(channel, fn) {
+        function subscribe(channel, fn) {
             if (!mediator.channels[channel]) {
                 mediator.channels[channel] = [];
             }
@@ -34,9 +34,9 @@ define(function(){
             mediator.channels[channel].push({ context: this, callback: fn });
             
             return this;
-        },
+        };
      
-        publish = function(channel) {
+        function publish(channel) {
             if (!mediator.channels[channel]) {
                 return false;
             }
