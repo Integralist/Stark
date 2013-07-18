@@ -9,6 +9,18 @@ This isn't a framework (or all-encompassing suite of tools). It is a 'strategy',
 - `app.use('extension', 'extension', 'extension')` loads specified extensions
 - `app.start()` goes through the HTML looking for components to load
 
+Also uses RequireJS and AMD to wrap the above API calls, for example...
+
+```js
+// the only part of this code that needs to change
+// is the list of extensions you want to use
+// the rest is standard (read: required to be run)
+require(['app', 'configuration'], function(app) {
+    app.use('extension-a', 'extension-b');
+    app.start();
+});
+```
+
 ## Example
 
 HTML...
