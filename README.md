@@ -134,6 +134,13 @@ To build the page specific modules simply run `grunt build`.
 
 ## Example of optimised code
 
+### HTML for 'about' page...
+
+```html
+<div data-component="world" id="js-component-world">World</div>
+<div data-component="contacts" id="js-component-contacts"></div>
+```
+
 ### Original `bootstrap-about`...
 
 ```js
