@@ -10,6 +10,7 @@ This isn't a framework (or all-encompassing suite of tools). It is a 'strategy',
 - [Example](#example)
 - [Conventions](#conventions)
 - [CSS Design](#css-design)
+- [Non-JavaScript Components](#non-javascript-components)
 - [Components vs Patterns?](#components-vs-patterns)
 - [Grid System](#grid-system)
 - [Browser support](#browser-support)
@@ -114,6 +115,22 @@ Through the use of media queries, each 'group' inherits the styles from the grou
 e.g. group 1 sets some styles, group 2 only sets additional styles it needs for that particular break-point, but relies on the group 1 styles that came before it.
 
 The components encapsulate their own logic for handling viewport dimensions.
+
+## Non-JavaScript Components
+
+Some components you create will have no need for JavaScript. If that's the case then it's best to create them using a simple HTML class instead of a `data-component` attribute and corresponding `id`.
+
+For example...
+
+```html
+<div class="features-and-analysis">
+    ...
+</div>
+
+<div class="index">
+    ...
+</div>
+```
 
 ## Components vs Patterns?
 

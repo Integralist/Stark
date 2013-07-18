@@ -11,14 +11,19 @@ module.exports = function (grunt) {
             storedModules = [];
 
         function parsePageName(page) {
-            return /\.\/(\w+)\.html/.exec(page)[1];
+            return /\.\/([\w-]+)\.html/.exec(page)[1];
         }
 
         function getModules(page) {
             var pattern = /data-component="([^"]+)"/gmi,
-                content = grunt.file.read(page);
+                content = grunt.file.read(page),
+                match   = content.match(pattern);
 
-            return content.match(pattern).map(function(module) {
+            if (!match) {
+                return;
+            }
+
+            return match.map(function(module) {
                 return 'components/' + module.split('"')[1] + '/component';
             });
         }
@@ -69,9 +74,14 @@ module.exports = function (grunt) {
             var pages = grunt.file.expand('./*.html'),
                 setWindowApp = false;
 
-            pages = pages.map(function(page) {
-                var modules    = getModules(page),
-                    extensions = getExtensions(page),
+            pages = _.compact(pages.map(function(page) {
+                var modules = getModules(page);
+
+                if (!modules) {
+                    return;
+                }
+
+                var extensions = getExtensions(page),
                     toBeLoaded = modules;
 
                 if (extensions) {
@@ -86,7 +96,7 @@ module.exports = function (grunt) {
                     include: toBeLoaded,
                     insertRequire: toBeLoaded
                 };
-            });
+            }));
 
             // For full list of options see:
             // https://github.com/jrburke/r.js/blob/master/build/example.build.js
@@ -163,6 +173,7 @@ module.exports = function (grunt) {
         function cleanUp() {
             grunt.file.delete('./release/app.js');
             grunt.file.delete('./release/build.txt');
+            grunt.file.delete('./release/configuration.js');
         }
 
         function optimisationSuccess(details) {

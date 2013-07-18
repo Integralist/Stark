@@ -3,7 +3,7 @@
    Distinguishes featured content from standard content
    ========================================================================== */
 
-[data-component="features-and-analysis"] {
+.features-and-analysis {
     border: 1px solid blue;
 
     @include respond-min($mq-group2) {
