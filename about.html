@@ -16,9 +16,16 @@
         <![endif]-->
     </head>
     <body>
-        <p><a href="index.html">Home</a></p>
-        <div data-component="world" id="js-component-world">World</div>
-        <div data-component="contacts" id="js-component-contacts"></div>
+        <div class="grid">
+            <div class="grid__col grid__col--span6">
+                Left column content
+            </div>
+            <div class="grid__col grid__col--span6">
+                <p><a href="index.html">Home</a></p>
+                <div data-component="world" id="js-component-world">World</div>
+                <div data-component="contacts" id="js-component-contacts"></div>
+            </div>
+        </div>
         <script src="libs/require.js" data-main="bootstrap-about" async></script>
     </body>
 </html>

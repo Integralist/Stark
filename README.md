@@ -96,6 +96,14 @@ e.g. group 1 sets some styles, group 2 only sets additional styles it needs for 
 
 The components encapsulate their own logic for handling viewport dimensions.
 
+## Grid System
+
+We utilise the same grid system as suggested by the [BBC GEL guidelines](http://www.bbc.co.uk/gel). Feel free to discard it and use your own grid if you so choose, but we've included it for any one who might find it useful.
+
+## Browser support
+
+The only thing we're using which will be a concern to some of you is the `box-sizing` property. Which means IE8+ is all good. If you're still supporting IE7... well, I'm sorry.
+
 ## Extra output in our CSS?
 
 In our simplified example it would look like there is a lot of code being generated, but this is because our examples aren't great.

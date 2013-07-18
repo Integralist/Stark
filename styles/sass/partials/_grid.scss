@@ -1,0 +1,94 @@
+/* =============================================================================
+   Grid is based off of the BBC GEL guidelines
+   http://www.bbc.co.uk/gel
+   ========================================================================== */
+
+* {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+
+    /* IE8+ support only */
+}
+
+/*
+    Notes:
+        The grid should have a maximum width of 976px (including outer margins)
+        outer margins are set using padding on the .grid class
+        column gutters are set using padding on the .grid__col class
+ */
+.grid {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 976px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.grid:before, 
+.grid:after {
+    content: '';
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+
+.grid:after {
+    clear: both;
+}
+
+.grid__col {
+    float: left;
+    padding: 0 4px;
+}
+
+.grid__col > span {
+    display: block;
+}
+
+/*
+    To calculate the columns: 
+    - divide the column required by total number of columns
+    - multiply that result by 100
+    
+    e.g. 
+        span-1 = (1 / 12) * 100 = 8.333333333
+        span-2 = (2 / 12) * 100 = 16.666666667
+        span-3 = (3 / 12) * 100 = 25
+        span-4 = (4 / 12) * 100 = 33.333333333
+        ...etc...
+
+    Might need to review a rounding bug on 
+    Blackberry devices? (see original grid code comment)
+
+    There is a strange rounding error though.
+    Only affects a single column spaning 100%.
+    ...AND...
+    it only occurs when the screen width is larger than 
+    the max width of 976px 
+    (so every odd number after: 977, 979, 981...etc)
+ */
+
+@for $i from 1 through 12 {
+    .grid__col--span#{$i} {
+        width: ($i / 12) * 100%;
+    }
+}
+
+/* Group 2 */
+@media (min-width: 400px) {
+    .grid {
+        padding: 0 12px;
+    }
+}
+
+/* Group 3 */
+@media (min-width: 600px) {
+    .grid {
+        padding: 0 8px;
+    }
+
+    .grid__col {
+        padding: 0 8px;
+    }
+}
