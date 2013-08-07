@@ -99,6 +99,7 @@ I clarify them in more detail later, but in summary the conventions are...
 - Extensions are placed inside a `/extensions/` directory
 - Each page has its own bootstrap js file `boostrap-xxx.js`
 - JavaScript needs to be loaded at the bottom of the page
+- Components need to have an `init` method
 
 ## CSS Design
 
