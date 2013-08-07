@@ -197,7 +197,7 @@ There are few conventions that need to be adhered to...
 
 	Note: extensions can't be passed to a component so make sure your 'extensions' are globally available by attaching them to a single global namespace called `app` (defined inside the app.js file). If you change the name then remember to update the grunt-customtasks.js as well.
 	
-	**And don't mistake the phrase "Don't polute the global namespace" with "Don't ever use the global namespace ever ever ever" -> that's just dogmatic nonsense.**
+	**And don't mistake the phrase "Don't pollute the global namespace" with "Don't ever use the global namespace ever ever ever" -> that's just dogmatic nonsense.**
 
 3. Each page should have its own bootstrap file: `boostrap-xxx.js` (where `xxx` is the page type or name). This file should include only one `require` call and that should be to the 'app' (see this project for an example) -> no other code of importance to the project should be placed inside that bootstrap file (code for the page should either be a component or a extension that is loaded by `app.js`).
 
