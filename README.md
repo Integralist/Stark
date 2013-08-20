@@ -137,9 +137,13 @@ For example...
 
 Just to be clear that a 'pattern' and a 'component' are two different things.
 
+Summary: Component > Pattern > Layout
+
 A component is a single piece of functionality. If you had a list of news articles then the list could potentially be the component. You're inserting into the page a news listing component.
 
 As part of that component you have individual news stories that all look the same. They are a 'pattern'. We're abstracted the common design elements that make up the component as a whole into a pattern, and that pattern has been written in such a way that it is a reusable chunk of code (as we may find that the pattern we've abstracted is common across a lot of different components).
+
+A layout then dictates how the pattern looks at certain break-points.
 
 ### Where is the logic held?
 
